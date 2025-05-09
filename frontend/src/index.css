@@ -1,14 +1,20 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+
   font-size: 16px;
   font-size-adjust: 0.5;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: light dark; /* Permite que el navegador aplique estilos por defecto para modo claro/oscuro si el SO lo tiene configurado. Buena práctica moderna. */
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
