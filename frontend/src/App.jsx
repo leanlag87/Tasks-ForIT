@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { TaskList } from "./components/TaskList";
+import { TaskForm } from "./components/TaskForm";
 
 // const TaskListPlaceholder = () => {
 //   return (
@@ -10,14 +11,14 @@ import { TaskList } from "./components/TaskList";
 //   );
 // };
 
-const TaskFormPlaceholder = () => {
-  return (
-    <div>
-      <h2>Formulario de Tarea</h2>
-      <p>Aquí se podrá agregar o editar una tarea.</p>
-    </div>
-  );
-};
+// const TaskFormPlaceholder = () => {
+//   return (
+//     <div>
+//       <h2>Formulario de Tarea</h2>
+//       <p>Aquí se podrá agregar o editar una tarea.</p>
+//     </div>
+//   );
+// };
 
 const NotFound = () => {
   return (
@@ -70,7 +71,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<TaskList />} />
-            <Route path="/new" element={<TaskFormPlaceholder />} />
+            <Route path="/new" element={<TaskForm />} />
             {/* Podríamos tener una ruta para editar: /edit/:id */}
             {/* <Route path="/edit/:taskId" element={<TaskFormPlaceholder editMode={true} />} /> */}
             <Route path="*" element={<NotFound />} />{" "}
