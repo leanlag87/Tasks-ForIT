@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export const TaskItem = ({ task, onDelete, onToggleComplete }) => {
   // La estructura de 'task' que esperamos del backend es:
@@ -74,10 +74,12 @@ export const TaskItem = ({ task, onDelete, onToggleComplete }) => {
         </p>
 
         <div className="mt-2">
-          {/* El botón de editar lo haremos después */}
-          <button className="btn btn-sm btn-outline-primary me-2" disabled>
-            Editar (Próx.)
-          </button>
+          <Link
+            to={`/edit/${task.id}`}
+            className="btn btn-sm btn-outline-primary me-2"
+          >
+            Editar
+          </Link>
           <button
             className="btn btn-sm btn-outline-danger"
             onClick={handleDelete}

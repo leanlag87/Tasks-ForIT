@@ -72,8 +72,8 @@ function App() {
           <Routes>
             <Route path="/" element={<TaskList />} />
             <Route path="/new" element={<TaskForm />} />
-            {/* Podríamos tener una ruta para editar: /edit/:id */}
-            {/* <Route path="/edit/:taskId" element={<TaskFormPlaceholder editMode={true} />} /> */}
+            {/* Placeholder para edición */}
+            <Route path="/edit/:taskId" element={<TaskForm />} />{" "}
             <Route path="*" element={<NotFound />} />{" "}
             {/* Ruta catch-all para 404 */}
           </Routes>
