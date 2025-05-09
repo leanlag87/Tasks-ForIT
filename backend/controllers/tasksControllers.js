@@ -1,0 +1,51 @@
+const taskData = require("../data/data");
+
+const getAllTasks = (req, res) => {
+  const tasks = taskData.getAll();
+  res.status(200).json(tasks);
+};
+
+const createTask = (req, res) => {
+  const { title, description } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ message: "El título es obligatorio" });
+  }
+
+  const newTask = taskData.add({ title, description });
+  // console.log('Tasks POST (controller):', taskData.getAll()); //  para depuración
+  res.status(201).json(newTask);
+};
+
+const updateTask = (req, res) => {
+  const { id } = req.params;
+  const updates = req.body; // { title, description, completed }
+
+  const updatedTask = taskData.update(id, updates);
+
+  if (!updatedTask) {
+    return res.status(404).json({ message: "Tarea no encontrada" });
+  }
+  // console.log('Tasks PUT (controller):', taskData.getAll());
+  res.status(200).json(updatedTask);
+};
+
+const deleteTask = (req, res) => {
+  const { id } = req.params;
+
+  const wasDeleted = taskData.remove(id);
+
+  if (!wasDeleted) {
+    return res.status(404).json({ message: "Tarea no encontrada" });
+  }
+
+  // console.log('Tasks DELETE (controller):', taskData.getAll());
+  res.status(200).json({ message: "Tarea eliminada con éxito" });
+};
+
+module.exports = {
+  getAllTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+};

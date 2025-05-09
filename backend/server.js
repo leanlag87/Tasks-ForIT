@@ -1,37 +1,25 @@
-//importamos los modulos
+// Importar los módulos necesarios
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { v4: uuidv4 } = require("uuid"); // Libreria para generar ids unicos
 
-//Instanciamos express
+// Importamos el router de tareas
+const taskRoutes = require("./routes/tasksRoutes");
+
+// Instanciamos Express
 const app = express();
 
-//Alamecenamos en memoria para las tareas con un array vacío
-let tasks = [];
-
-// Estructura de una tarea:
-// {
-//   id: string (uuidv4),
-//   title: string,
-//   description: string,
-//   completed: boolean,
-//   createdAt: Date
-// }
-
-//Configuramos el puerto
+// Configurar el puerto
 const PORT = process.env.PORT || 3977;
 
-//Middlewares
-app.use(cors()); //Permitir peticiones de otros dominios
-app.use(express.json()); //Parsear el body de las peticiones a json
+// Middlewares
+app.use(cors());
+app.use(express.json());
 
-//Ruta de prueba
-app.get("/", (req, res) => {
-  res.send("Estoy en la API");
-});
+// Todas las rutas definidas en taskRoutes
+app.use("/api/tasks", taskRoutes);
 
-//Inicializamos el servidor
+// Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`Server ejecutando en el puerto ${PORT}`);
 });
