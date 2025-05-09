@@ -5,6 +5,16 @@ const getAllTasks = (req, res) => {
   res.status(200).json(tasks);
 };
 
+const getTaskById = (req, res) => {
+  const { id } = req.params;
+  const task = taskData.findById(id); // Usamos la función findById que ya teníamos en data/tasks.js
+
+  if (!task) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+  res.status(200).json(task);
+};
+
 const createTask = (req, res) => {
   const { title, description } = req.body;
 
@@ -45,6 +55,7 @@ const deleteTask = (req, res) => {
 
 module.exports = {
   getAllTasks,
+  getTaskById,
   createTask,
   updateTask,
   deleteTask,
