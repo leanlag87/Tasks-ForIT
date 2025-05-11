@@ -1,3 +1,9 @@
+/**
+ * Componente TaskItem
+ *
+ * Renderiza una tarjeta con la información de una tarea individual, permitiendo marcarla como completada,
+ * editarla o eliminarla. Recibe la tarea y funciones de manejo como props.
+ */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -12,7 +18,6 @@ export const TaskItem = ({ task, onDelete, onToggleComplete }) => {
   const handleDelete = async () => {
     setIsDeleting(true);
     await onDelete(task.id); // La función onDelete la proveerá TaskList
-    // No necesitamos setIsDeleting(false) si el componente se elimina
   };
 
   const handleToggleComplete = async () => {
@@ -45,10 +50,10 @@ export const TaskItem = ({ task, onDelete, onToggleComplete }) => {
               )}
             </p>
           </div>
-          {/* Botón para marcar como completada (usando un checkbox visualmente) */}
+          {/* Botón para marcar como completada usando un checkbox */}
           <div className="form-check ms-3">
             <input
-              className="form-check-input"
+              className="form-check-input bg-success border-success"
               type="checkbox"
               id={`complete-${task.id}`}
               checked={task.completed}
@@ -104,13 +109,15 @@ export const TaskItem = ({ task, onDelete, onToggleComplete }) => {
   );
 };
 
+// PropTypes valida que task contenga todos los campos requeridos y que las
+// funciones de manejo (onDelete, onToggleComplete) estén definidas correctamente
 TaskItem.propTypes = {
   task: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     completed: PropTypes.bool.isRequired,
-    createdAt: PropTypes.string.isRequired, // Viene como string ISO del backend, Date lo parsea
+    createdAt: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
   onToggleComplete: PropTypes.func.isRequired,

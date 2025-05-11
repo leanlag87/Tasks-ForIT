@@ -2,24 +2,6 @@ import { Routes, Route, Link } from "react-router-dom";
 import { TaskList } from "./components/TaskList";
 import { TaskForm } from "./components/TaskForm";
 
-// const TaskListPlaceholder = () => {
-//   return (
-//     <div>
-//       <h2>Lista de Tareas</h2>
-//       <p>Aquí se mostrarán las tareas.</p>
-//     </div>
-//   );
-// };
-
-// const TaskFormPlaceholder = () => {
-//   return (
-//     <div>
-//       <h2>Formulario de Tarea</h2>
-//       <p>Aquí se podrá agregar o editar una tarea.</p>
-//     </div>
-//   );
-// };
-
 const NotFound = () => {
   return (
     <div>
@@ -34,10 +16,10 @@ function App() {
     <>
       <div className="container mt-4">
         <header className="mb-4">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
             <div className="container-fluid">
-              <Link className="navbar-brand" to="/">
-                Gestor de Tareas
+              <Link className="navbar-brand text-info" to="/">
+                Lista de Tareas
               </Link>
               <button
                 className="navbar-toggler"
@@ -79,7 +61,7 @@ function App() {
           </Routes>
         </main>
 
-        <footer className="text-center mt-5 py-3 bg-light">
+        <footer className="text-center mt-5 py-3 bg-dark text-light rounded">
           <p>© {new Date().getFullYear()} Mi App de Tareas</p>
         </footer>
       </div>

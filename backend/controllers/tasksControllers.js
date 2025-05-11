@@ -23,7 +23,7 @@ const createTask = (req, res) => {
   }
 
   const newTask = taskData.add({ title, description });
-  // console.log('Tasks POST (controller):', taskData.getAll()); //  para depuración
+
   res.status(201).json(newTask);
 };
 
@@ -36,7 +36,7 @@ const updateTask = (req, res) => {
   if (!updatedTask) {
     return res.status(404).json({ message: "Tarea no encontrada" });
   }
-  // console.log('Tasks PUT (controller):', taskData.getAll());
+
   res.status(200).json(updatedTask);
 };
 
@@ -49,7 +49,6 @@ const deleteTask = (req, res) => {
     return res.status(404).json({ message: "Tarea no encontrada" });
   }
 
-  // console.log('Tasks DELETE (controller):', taskData.getAll());
   res.status(200).json({ message: "Tarea eliminada con éxito" });
 };
 

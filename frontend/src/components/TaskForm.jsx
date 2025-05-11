@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-//import PropTypes from "prop-types";
 
 export const TaskForm = () => {
   // Aquí irán los estados y funciones para manejar el formulario
@@ -36,8 +35,6 @@ export const TaskForm = () => {
         } catch (err) {
           console.error("Error fetching task for edit:", err);
           setError(err.message);
-          // Opcional: redirigir si la tarea no se encuentra o hay error grave
-          // navigate('/');
         } finally {
           setIsLoading(false);
         }
@@ -98,9 +95,6 @@ export const TaskForm = () => {
         );
       }
 
-      // No necesitamos el cuerpo de la respuesta si solo redirigimos
-      // const resultData = await response.json();
-
       navigate("/"); // Redirigir a la lista de tareas
     } catch (err) {
       console.error(`Error ${isEditMode ? "updating" : "creating"} task:`, err);
@@ -135,6 +129,7 @@ export const TaskForm = () => {
           <input
             type="text"
             className="form-control"
+            placeholder="Ingrese el título de la tarea"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -149,15 +144,14 @@ export const TaskForm = () => {
           <textarea
             className="form-control"
             id="description"
+            placeholder="Describa las tareas que quiere realizar"
             rows="3"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={isSubmitting}
           ></textarea>
         </div>
-        {/* El estado 'completed' se maneja con el checkbox en TaskItem,
-            pero lo mantenemos aquí para que el PUT envíe el valor correcto si no se modifica.
-            No mostramos un control para 'completed' en este formulario de edición de texto. */}
+
         <button
           type="submit"
           className="btn btn-primary me-2"
@@ -186,7 +180,3 @@ export const TaskForm = () => {
     </div>
   );
 };
-
-// TaskForm.propTypes = {
-//   onTaskCreated: PropTypes.func, // Opcional por ahora
-// };

@@ -40,10 +40,6 @@ export const TaskList = () => {
   }, [fetchTasks]); // Ejecuta fetchTasks cuando el componente se monta o si fetchTasks cambia
 
   const handleDeleteTask = async (taskId) => {
-    // Optimistic UI update (opcional):
-    // const originalTasks = [...tasks];
-    // setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/tasks/${taskId}`,
@@ -65,28 +61,16 @@ export const TaskList = () => {
         throw new Error(errorMessage);
       }
       // Si es exitoso (204 No Content), actualizamos la lista filtrando la tarea eliminada
-      // setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId)); // Ya no es necesario si no hacemos UI optimista
       // Mejor, volvemos a cargar las tareas para asegurar consistencia, o filtramos si estamos seguros.
       // Para este caso, filtrar es seguro y más eficiente si el DELETE fue 204
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     } catch (err) {
-      console.error("Error deleting task:", err);
+      console.error("Error detallado:", err);
       setError(`Error al eliminar: ${err.message}`);
-      // Si hubo un error, podríamos revertir la UI optimista si la implementamos
-      // setTasks(originalTasks);
-      // O simplemente mostrar el error y el usuario puede reintentar/refrescar
     }
   };
 
   const handleToggleCompleteTask = async (taskId, newCompletedState) => {
-    // Optimistic UI update (opcional):
-    // const originalTasks = [...tasks];
-    // setTasks(prevTasks =>
-    //   prevTasks.map(task =>
-    //     task.id === taskId ? { ...task, completed: newCompletedState } : task
-    //   )
-    // );
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/tasks/${taskId}`,
@@ -115,8 +99,6 @@ export const TaskList = () => {
     } catch (err) {
       console.error("Error toggling task complete:", err);
       setError(`Error al actualizar: ${err.message}`);
-      // Si hubo un error, podríamos revertir la UI optimista si la implementamos
-      // setTasks(originalTasks);
     }
   };
 
@@ -143,7 +125,7 @@ export const TaskList = () => {
   }
   // Mostrar error de operación si existe, incluso si hay tareas (el error podría ser de una acción)
   if (error && tasks.length > 0) {
-    // Podríamos mostrar este error de forma más sutil, como un toast
+    // Mostrar error de operación de forma visible si lo hay
     console.warn("Operación fallida, mostrando error sobre la lista:", error);
   }
 
